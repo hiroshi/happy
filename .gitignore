@@ -1,0 +1,6 @@
+log/*.log
+db/*.sqlite3
+db/development_structure.sql
+db/schema.rb
+coverage
+tmp
