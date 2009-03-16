@@ -1,4 +1,10 @@
 class HappiesController < ApplicationController
+  def home
+  end
+
+  def loader
+  end
+
   def index
     @count = Happy.count
   end
