@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <th>uri</th>
+    <th>happies</th>
+  </tr>
+<% @sites.each do |site| %>
+  <tr>
+    <td><%= link_to h(site.uri), site.uri %></td>
+    <td><%= site.happies.count %></td>
+  </tr>
+<% end %>
+</table>

@@ -6,13 +6,15 @@ class HappiesController < ApplicationController
   end
 
   def index
-    @count = Happy.count
+    @site = Site.find_or_create_by_uri(params[:uri] || request.referer)
+    @count = @site.happies.count
   end
 
   def create
-    @happy = Happy.new(params[:happy])
+    @site = Site.find_or_create_by_uri(params[:uri])
+    @happy = @site.happies.build(params[:happy])
     if @happy.save
-      redirect_to happies_path
+      redirect_to happies_path(:uri => @site.uri)
     else
       # TODO: What shall we do if save is failed...
     end

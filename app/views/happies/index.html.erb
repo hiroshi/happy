@@ -1,7 +1,9 @@
 <div>
+  uri: <%= @site.uri %>
   現在の happies: <%= @count %><br/>
 
   <% form_for :happy do |form| %>
-    <%= submit_tag "happy を送る" %>
+    <%= hidden_field_tag "uri", @site.uri %>
+    <%= submit_tag "happy" %>
   <% end %>
 </div>
