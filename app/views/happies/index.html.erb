@@ -2,6 +2,8 @@
   uri: <%= @site.uri %>
   現在の happies: <%= @count %><br/>
 
+  <%#= debug session.keys %>
+
   <% form_for :happy do |form| %>
     <%= hidden_field_tag "uri", @site.uri %>
     <%= submit_tag "happy" %>

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :people
+
   map.resources :sites
 
   map.resources :happies, :only => [:index, :create]
