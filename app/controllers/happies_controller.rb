@@ -8,7 +8,7 @@ class HappiesController < ApplicationController
   def index
     @guest = Person.find_or_create_by_session_key(session[:session_id])
     @site = Site.find_or_create_by_uri(params[:uri] || request.referer)
-    @count = @site.happies.count
+    # @count = @site.happies.count
   end
 
   def create

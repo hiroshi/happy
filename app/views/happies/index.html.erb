@@ -1,7 +1,8 @@
 <div>
-  uri: <%= @site.uri %>
-  現在の happies: <%= @count %><br/>
-
+  <p>uri: <%= @site.uri %></p>
+  <p>このサイトの happies: <%= @site.happies.count %></p>
+  <p>あなたがこのサイトにあげた happies: <%= @site.happies.count(:conditions =>{:person_id => @guest}) %></p>
+  <p>あなたが誰かにあげた happies: <%= @guest.happies.count %></p>
   <%#= debug session.keys %>
 
   <% form_for :happy do |form| %>
