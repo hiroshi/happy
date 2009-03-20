@@ -1,12 +1,22 @@
 <div>
-  <p>uri: <%= @site.uri %></p>
-  <p>このサイトの happies: <%= @site.happies.count %></p>
-  <p>あなたがこのサイトにあげた happies: <%= @site.happies.count(:conditions =>{:person_id => @guest}) %></p>
-  <p>あなたが誰かにあげた happies: <%= @guest.happies.count %></p>
-  <%#= debug session.keys %>
+  <%= @site.uri %>
+  <dl>
+   <dh>Happies:</dh>
+   <dd><%= @site.happies.by_person(current_guest).count %>(yours) / <%= @site.happies.count %>(all)</dd>
+  </dl>
 
   <% form_for :happy do |form| %>
     <%= hidden_field_tag "uri", @site.uri %>
-    <%= submit_tag "happy" %>
+    <%= submit_tag "I'm happy" %>
   <% end %>
+<% if current_guest.authenticated? %>
+  OpenID: <%= current_guest.identity_url %>
+<% else %>
+  <% form_tag session_url, :target => "_top" do %>
+    <label for="openid_identifier">OpenID:</label>
+    <%= text_field_tag "openid_identifier" %>
+    <%= hidden_field_tag "site_url", @site.uri %>
+    <%= submit_tag '認証', :disable_with => "Signing in&hellip;" %>
+  <% end %>    
+<% end %>
 </div>

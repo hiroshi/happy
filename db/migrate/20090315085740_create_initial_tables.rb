@@ -15,7 +15,7 @@ class CreateInitialTables < ActiveRecord::Migration
 
     create_table :people do |t|
       t.string :session_key
-      t.string :open_id_uri
+      t.string :identity_url
       t.string :name
 
       t.timestamps

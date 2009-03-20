@@ -7,4 +7,9 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
+
+  def current_guest
+    @current_guest ||= Person.find_by_id(session[:guest_id]) || Person.find_or_create_by_session_key(session[:session_id])
+  end
+  helper_method :current_guest
 end
