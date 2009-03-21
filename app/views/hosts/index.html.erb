@@ -9,8 +9,9 @@
   <%= render :partial => "loader_script", :locals => {:identity_url => "http://blog.yakitara.com/"} %>
 </div>
 
-<%= link_to "集計", sites_path %>
 <% else %>
+
 <p>Happy host の認証</p>
-  <%= render :partial => "sessions/new", :locals => {:dest_url => hosts_path} %>
+<%= render :partial => "sessions/new", :locals => {:dest_url => hosts_path} %>
+
 <% end %>
