@@ -1,17 +1,18 @@
 class CreateInitialTables < ActiveRecord::Migration
   def self.up
     create_table :happies do |t|
-      t.integer :site_id, :null => false
-      t.integer :person_id, :null => false
+      t.integer :host_person_id, :null => false
+      t.integer :guest_person_id, :null => false
+      t.string :url, :null => false
 
       t.timestamps
     end
 
-    create_table :sites do |t|
-      t.string :uri, :null => false
+#     create_table :sites do |t|
+#       t.string :uri, :null => false
 
-      t.timestamps
-    end
+#       t.timestamps
+#     end
 
     create_table :people do |t|
       t.string :session_key
@@ -23,7 +24,7 @@ class CreateInitialTables < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :sites
+    drop_table :people
     drop_table :happies
   end
 end

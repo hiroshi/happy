@@ -21,16 +21,16 @@ class SessionsController < ApplicationController
 #   end
 
   def open_id_authentication
-    session[:site_url] = params[:site_url] if params[:site_url]
+    session[:dest_url] = params[:dest_url] if params[:dest_url]
     authenticate_with_open_id(params[:openid_identifier]) do |result, identity_url|
       if result.successful?
         # Find identitied person first,
-        if @guest = Person.find_by_identity_url(identity_url)
-        elsif @guest = Person.find_by_session_key(session[:session_id])
+        if @person = Person.find_by_identity_url(identity_url)
+        elsif @person = Person.find_by_session_key(session[:session_id])
           # or temporary session user already exists use this,
-          @guest.update_attributes!(:identity_url => identity_url, :session_id => nil)
+          @person.update_attributes!(:identity_url => identity_url, :session_key => nil)
         else
-          @guest = Person.create_by_identity_url(identity_url)
+          @person = Person.create_by_identity_url(identity_url)
         end
         successful_login
 #         else
@@ -54,8 +54,8 @@ class SessionsController < ApplicationController
   private
 
   def successful_login
-    session[:guest_id] = @guest.id
-    redirect_to session[:site_url]
+    session[:person_id] = @person.id
+    redirect_to session[:dest_url]
   end
 
   def failed_login(message)

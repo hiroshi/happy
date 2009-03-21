@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
 
   def current_guest
-    @current_guest ||= Person.find_by_id(session[:guest_id]) || Person.find_or_create_by_session_key(session[:session_id])
+    @current_person ||= Person.find_by_id(session[:person_id]) || Person.find_or_create_by_session_key(session[:session_id])
   end
-  helper_method :current_guest
+  alias_method :current_host, :current_guest
+  helper_method :current_guest, :current_host
 end

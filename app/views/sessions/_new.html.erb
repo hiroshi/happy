@@ -1,0 +1,6 @@
+<% form_tag session_url, :target => "_top" do %>
+  <label for="openid_identifier">OpenID:</label>
+  <%= text_field_tag "openid_identifier" %>
+  <%= hidden_field_tag "dest_url", dest_url %>
+  <%= submit_tag '認証', :disable_with => "認証中&hellip;" %>
+<% end %>    

@@ -1,14 +1,16 @@
 <div>
-  <%= @site.uri %>
+  <%= @host.identity_url %> : <%= params[:site_url] %>
   <dl>
    <dh>Happies:</dh>
-   <dd><%= @site.happies.by_person(current_guest).count %>(yours) / <%= @site.happies.count %>(all)</dd>
+   <dd><%= @host.host_happies.by_guest(current_guest).count %>(yours) / <%= @host.host_happies.count %>(all)</dd>
   </dl>
 
-  <% form_for :happy do |form| %>
-    <%= hidden_field_tag "uri", @site.uri %>
+  <% form_for Happy.new(:url => params[:site_url]) do |form| %>
+    <%= form.hidden_field "url" %>
+    <%= hidden_field_tag "identity_url", @host.identity_url %>
     <%= submit_tag "I'm happy" %>
   <% end %>
+
 <% if current_guest.authenticated? %>
   OpenID: <%= current_guest.identity_url %>
 <% else %>

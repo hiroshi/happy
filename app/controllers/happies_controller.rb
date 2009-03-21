@@ -1,22 +1,9 @@
 class HappiesController < ApplicationController
-  def home
-  end
-
-  def loader
-  end
-
-  def index
-#    @guest = Person.find_or_create_by_session_key(session[:session_id])
-    @site = Site.find_or_create_by_uri(params[:uri] || request.referer)
-    # @count = @site.happies.count
-  end
-
   def create
-#    @guest = Person.find_or_create_by_session_key(session[:session_id])
-    @site = Site.find_or_create_by_uri(params[:uri])
-    @happy = @site.happies.build((params[:happy] || {}).merge(:person_id => current_guest.id))
+    @host = Person.find_by_identity_url(params[:identity_url])
+    @happy = @host.host_happies.build((params[:happy] || {}).merge(:guest_person_id => current_guest.id))
     if @happy.save
-      redirect_to happies_path(:uri => @site.uri)
+      redirect_to host_path(:site_url => @happy.url, :identity_url => params[:identity_url])
     else
       # TODO: What shall we do if save is failed...
     end

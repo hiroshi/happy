@@ -1,0 +1,9 @@
+var Happy = {
+  identify: function(url) {
+    // In case of reloading, URL parameters in src attribute are not passed with Safari (at least for Mac v3.2.1 (5525.27.1))
+    // This don't work: document.write("<iframe src=\"<%= host_url %>?identity_url=" + url + "\" width=\"200\" height=\"240\"></iframe>");
+    // I don't know why, but setting src attribute via javascript works.
+    document.write("<iframe id=\"happy_frame\" src=\"\" width=\"200\" height=\"240\"></iframe>");
+    document.getElementById("happy_frame").src = "<%= host_url %>?identity_url=" + url + "&site_url=" + window.location;
+  }
+};
